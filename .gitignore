@@ -1,0 +1,10 @@
+*.sri
+*.sro
+*.sru
+*.rot
+qsview
+notes
+*.o
+*.h.gch
+moc_*.cpp
+Makefile
