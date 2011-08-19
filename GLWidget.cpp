@@ -187,12 +187,30 @@ void GLWidget::initializeGL() {
 
 }
 
-void GLWidget::resizeGL(int w, int h) {
-
-	glViewport (0, 0, w, h);
+void GLWidget::updateProjection () {
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective (45.0, (float)w/(float)h, 1.0, 1000.0);
+	if (projection == QSVIEW_PERSP) {
+		gluPerspective (45.0, (float)_windowWidth/(float)_windowHeight, 1.0, 1000.0);
+	}
+	else if (projection == QSVIEW_ORTHO) {
+		glOrtho (	-static_cast<float>(_windowWidth)/2.0f,
+				static_cast<float>(_windowWidth)/2.0f,
+				-static_cast<float>(_windowHeight)/2.0f,
+				static_cast<float>(_windowHeight)/2.0f,
+				-500.0f,
+				500.0f );
+	}
+	else {
+		std::cerr << "error on projection!  = " << projection << std::endl;
+	}
+}
+
+void GLWidget::resizeGL(int w, int h) {
+	_windowWidth = w;
+	_windowHeight = h;
+	glViewport (0, 0, w, h);
+	updateProjection();
 	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
 }
@@ -573,6 +591,12 @@ void GLWidget::setTerminals (bool value) {
 	_showTerminals = value;
 	updateGL();
 }
+
+//void GLWidget::setProjection (int proj) {
+//	projection = proj;
+//	updateProjection ();
+//	updateGL();
+//}
 
 void GLWidget::setWebs (bool value) {
 	_showWebs = value;

@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QComboBox>
 #include <sstream>
 #include "Database.h"
 #include "GLWidget.h"
@@ -27,6 +28,7 @@ class MyWindow : public QWidget
 	QLabel* mousePosition;
 	QLabel* selectedObject;
 	QLabel* message;
+	//QComboBox* combo;
 
 	MyWindow (Database& database, QWidget *parent = 0);
 

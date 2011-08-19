@@ -7,7 +7,7 @@ TARGET =
 DEPENDPATH += .
 INCLUDEPATH += .
 QT += opengl
-#CONFIG += debug
+CONFIG += debug
 
 # Input
 HEADERS += Frame.h \
