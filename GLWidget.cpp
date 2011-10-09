@@ -16,6 +16,8 @@ GLWidget::GLWidget (Database& database, QWidget *parent)
 	_height = 0.5;
 	_segmentThickness = 0.05;
 
+	_projection = QSVIEW_PERSP;
+
 	_pitch = 0.5;
 	_height = 0.5;
 	_terminalThickness = 0.08;
@@ -60,10 +62,12 @@ GLWidget::GLWidget (Database& database, QWidget *parent)
 	for (unsigned int i=0; i<_database.segmentList.size(); ++i) {
 		Vec3f color;
 
+
 		if (_database.segmentList[i].axis == 2) color = _viaColor;
 		else color = _segmentColors[_database.segmentList[i].start[2] % _segmentColors.size()];
 
 		buildSegmentVertices (_database.segmentList[i], color, _pitch, _height, _segmentThickness, indexOffset, tempVertexArray, tempColorArray, tempIndexArray);
+
 
 		// put their result onto the big vertex array
 		std::memcpy (&_segmentVertexArray[24*i], tempVertexArray, 24*sizeof(float));
@@ -190,10 +194,10 @@ void GLWidget::initializeGL() {
 void GLWidget::updateProjection () {
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
-	if (projection == QSVIEW_PERSP) {
+	if (_projection == QSVIEW_PERSP) {
 		gluPerspective (45.0, (float)_windowWidth/(float)_windowHeight, 1.0, 1000.0);
 	}
-	else if (projection == QSVIEW_ORTHO) {
+	else if (_projection == QSVIEW_ORTHO) {
 		glOrtho (	-static_cast<float>(_windowWidth)/2.0f,
 				static_cast<float>(_windowWidth)/2.0f,
 				-static_cast<float>(_windowHeight)/2.0f,
@@ -202,7 +206,7 @@ void GLWidget::updateProjection () {
 				500.0f );
 	}
 	else {
-		std::cerr << "error on projection!  = " << projection << std::endl;
+		std::cerr << "error on projection!  = " << _projection << std::endl;
 	}
 }
 
@@ -304,7 +308,6 @@ void GLWidget::drawLists() {
 		glColorPointer (3, GL_FLOAT, 0, _segmentColorArray);
 		glDrawElements (GL_TRIANGLES, 36*_database.segmentList.size(), GL_UNSIGNED_INT, _segmentIndexArray);
 	}
-
 
 	if (_showTerminals) {
 		glVertexPointer (3, GL_FLOAT, 0, _terminalVertexArray);

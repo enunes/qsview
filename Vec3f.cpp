@@ -112,3 +112,10 @@ std::istream& operator>> (std::istream& in, Vec3f& v) {
 	return in;
 }
 
+
+void zeroThreshold (Vec3f& v, const float& threshold = 1e-6) {
+	for (unsigned int i=0; i<3; ++i) {
+		if (std::fabs(v[i]) < threshold) v[i] = 0.0f;
+	}
+}
+

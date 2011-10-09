@@ -30,7 +30,4 @@ struct Database {
 	std::vector <unsigned int> unroutedList;
 };
 
-const unsigned int QSVIEW_PERSP = 0;
-const unsigned int QSVIEW_ORTHO = 1;
-
 #endif

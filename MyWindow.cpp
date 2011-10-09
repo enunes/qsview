@@ -7,24 +7,25 @@ MyWindow::MyWindow (Database& database, QWidget *parent)
 
 	gl = new GLWidget (_database);
 	gl->setSizePolicy (QSizePolicy::Ignored, QSizePolicy::Ignored); // Expand as much as possible
+	this->showMaximized();
 
-	QLabel* searchLabel = new QLabel ("Search");
+	QLabel *searchLabel = new QLabel ("Search");
 	searchLabel->setAlignment(Qt::AlignCenter | Qt::AlignRight);
 	searchField = new QLineEdit ("net names or grid positions; examples: 'N16' or '34 55 2'");
 
-	QLabel* speedLabel = new QLabel ("Speed");
+	QLabel *speedLabel = new QLabel ("Speed");
 	speedLabel->setAlignment(Qt::AlignCenter | Qt::AlignRight);
-	QLabel* axisLabel = new QLabel ("Axis");
+	QLabel *axisLabel = new QLabel ("Axis");
 	axisLabel->setAlignment(Qt::AlignCenter | Qt::AlignRight);
-	QLabel* namesLabel = new QLabel ("Names");
+	QLabel *namesLabel = new QLabel ("Names");
 	namesLabel->setAlignment(Qt::AlignCenter | Qt::AlignRight);
-	QLabel* segmentsLabel = new QLabel ("Segments");
+	QLabel *segmentsLabel = new QLabel ("Segments");
 	segmentsLabel->setAlignment(Qt::AlignCenter | Qt::AlignRight);
-	QLabel* terminalsLabel = new QLabel ("Terminals");
+	QLabel *terminalsLabel = new QLabel ("Terminals");
 	terminalsLabel->setAlignment(Qt::AlignCenter | Qt::AlignRight);
-	QLabel* websLabel = new QLabel ("Webs");
+	QLabel *websLabel = new QLabel ("Webs");
 	websLabel->setAlignment(Qt::AlignCenter | Qt::AlignRight);
-	QLabel* gridLabel = new QLabel ("Grid");
+	QLabel *gridLabel = new QLabel ("Grid");
 	gridLabel->setAlignment(Qt::AlignCenter | Qt::AlignRight);
 
 	mousePosition = new QLabel ("[0, 0]");
@@ -39,29 +40,29 @@ MyWindow::MyWindow (Database& database, QWidget *parent)
 	message->setSizePolicy (QSizePolicy::Ignored, QSizePolicy::Maximum);
 	message->setAlignment(Qt::AlignLeft);
 
-	QSpinBox* speed = new QSpinBox;
+	QSpinBox *speed = new QSpinBox;
 	speed->setRange (1, 20);
 	speed->setValue(gl->getSpeed());
 
-	QCheckBox* axis = new QCheckBox;
+	QCheckBox *axis = new QCheckBox;
 	axis->setChecked(gl->getAxis());
-	QCheckBox* names = new QCheckBox;
+	QCheckBox *names = new QCheckBox;
 	names->setChecked(gl->getNames());
-	QCheckBox* segments = new QCheckBox;
+	QCheckBox *segments = new QCheckBox;
 	segments->setChecked(gl->getSegments());
-	QCheckBox* terminals = new QCheckBox;
+	QCheckBox *terminals = new QCheckBox;
 	terminals->setChecked(gl->getTerminals());
-	QCheckBox* webs = new QCheckBox;
+	QCheckBox *webs = new QCheckBox;
 	webs->setChecked(gl->getWebs());
-	QCheckBox* grid = new QCheckBox;
+	QCheckBox *grid = new QCheckBox;
 	grid->setChecked(gl->getGrid());
 
-	combo = new QComboBox();
+	QComboBox *combo = new QComboBox();
 	combo->addItem ("Perspective");
 	combo->addItem ("Orthogonal");
 
-	QPushButton* clearButton = new QPushButton ("Clear");
-	QPushButton* unroutedButton = new QPushButton ("Unrouted");
+	QPushButton *clearButton = new QPushButton ("Clear");
+	QPushButton *unroutedButton = new QPushButton ("Unrouted");
 
 	QHBoxLayout *toolbar1 = new QHBoxLayout;
 	toolbar1->addWidget (searchLabel);

@@ -8,3 +8,5 @@ notes
 *.h.gch
 moc_*.cpp
 Makefile
+tags
+cscope.out

@@ -8,10 +8,10 @@ DEPENDPATH += .
 INCLUDEPATH += .
 QT += opengl
 CONFIG += debug
+#QMAKE_CXXFLAGS += -ansi -pedantic-errors -Wall -Wextra -Wfloat-equal -Wshadow -Wcast-qual -Wcast-align -ggdb -pg
 
 # Input
 HEADERS += Frame.h \
-#           GLTerminal.h \
 	   GLFunctions.h \
            GLWeb.h \
            GLWidget.h \
@@ -32,7 +32,6 @@ HEADERS += Frame.h \
 	   glUtils.h
 
 SOURCES += Frame.cpp \
-#           GLTerminal.cpp \
 	   GLFunctions.cpp \
            GLWeb.cpp \
            GLWidget.cpp \

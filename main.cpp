@@ -16,13 +16,11 @@
 
 void help () {
 	std::cerr << std::endl;
-	std::cerr << "Erico Nunes [nunes dot erico at gmail dot com] @ 2010" << std::endl;
+	std::cerr << "Erico Nunes [nunes dot erico at gmail dot com] @ 2011" << std::endl;
 	std::cerr << "Qsview - Simple 3D symbolic routing viewer" << std::endl;
-	std::cerr << "QT version" << std::endl;
 	std::cerr << std::endl;
 	std::cerr << "qsview [filename]" << std::endl;
 }
-
 
 Database _database;
 
@@ -44,14 +42,7 @@ bool parseSru (const std::string& filename) {
 			break;
 		}
 		_database.unroutedList.push_back (_database.namesMap[readBuffer]);
-	/*	unsigned int t = _database.namesMap[readBuffer];
-		std::cout << "name = " << readBuffer << std::endl;
-		std::cout << "index = " << t << std::endl;
-		std::cout << "backtest = " << _database.netNames[t] << std::endl;*/
 	}
-/*	for (unsigned int i=0; i<_database.unroutedList.size(); ++i) {
-		std::cout << "unrouted = " << _database.netNames[_database.unroutedList[i]] << std::endl;
-	}*/
 	file.close();
 	return true;
 }
@@ -111,11 +102,6 @@ bool parseSro (const std::string& filename, MatrixCoord3D& max) {
 		}
 	}
 	file.close();
-
-//	_database.matrix = Matrix3D<Node> (max + MatrixCoord3D(1, 1, 1));
-
-
-	//	std::cout << matrix << std::endl;
 
 	return true;
 }
@@ -182,9 +168,9 @@ bool parseSri (const std::string& filename, MatrixCoord3D& max) {
 						tName << _database.netNames.back() << ":" << netTerminals;
 						_database.terminalLabels.push_back (tName.str());
 
-						for (unsigned int i=0; i<3; ++i) {
-							if (readCoord[i] > max[i]) {
-								max[i] = readCoord[i];
+						for (unsigned int j=0; j<3; ++j) {
+							if (readCoord[j] > max[j]) {
+								max[j] = readCoord[j];
 							}
 						}
 						++netTerminals;
@@ -307,13 +293,8 @@ int main (int argc, char** argv) {
 	}
 
 
-
 //	std::cout << _database.netNames << std::endl;
 
-
-
-
-	// if parsed both, generate database
 
 	QApplication app (argc, argv);
 

@@ -42,4 +42,6 @@ std::ostream& operator<<(std::ostream& out, const Vec3f& v);
 std::istream& operator>> (std::istream& in, Vec3f& v);
 
 
+void zeroThreshold (Vec3f& v, const float& threshold);
+
 #endif

@@ -30,8 +30,8 @@
 
 //typedef unsigned int GLSegment[12*3];
 
-const unsigned int PERSP = 0;
-const unsigned int ORTHO = 1;
+const unsigned int QSVIEW_PERSP = 0;
+const unsigned int QSVIEW_ORTHO = 1;
 
 class MyWindow;
 
@@ -43,24 +43,24 @@ class GLWidget : public QGLWidget
 
 	Database& _database;
 
-	unsigned int projection;
+	unsigned int _projection;
 
 	unsigned int _windowWidth;
-	unsigned int _windowHeight;;
+	unsigned int _windowHeight;
 
 	float _segmentThickness;
 	float _terminalThickness;
 	float _webPattern;
 
-	unsigned int _pitch;
-	unsigned int _height;
+	float _pitch;
+	float _height;
 
 	float* _segmentVertexArray;
-	float* _segmentColorArray;;
+	float* _segmentColorArray;
 	unsigned int* _segmentIndexArray;
 
 	float* _terminalVertexArray;
-	float* _terminalColorArray;;
+	float* _terminalColorArray;
 	unsigned int* _terminalIndexArray;
 
 	std::vector<Vec3f> _segmentColors;

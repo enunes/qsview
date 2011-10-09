@@ -1,13 +1,13 @@
 
 #include "GLFunctions.h"
 
-void buildSegmentVertices (const Segment& s, const Vec3f& color, const float& pitch, const float& height, const float& thickness, const unsigned int& offset, float* vertexArray, float* colorArray, unsigned int *ind) {
+void buildSegmentVertices (const Segment &s, const Vec3f &color, const float &pitch, const float &height, const float &thickness, const unsigned int &offset, float *vertexArray, float *colorArray, unsigned int *ind) {
 
-	const MatrixCoord3D& start = s.start;
-	const MatrixCoord3D& end = s.end;
+	const MatrixCoord3D &start = s.start;
+	const MatrixCoord3D &end = s.end;
 
-	Vec3f xyz (static_cast<float>(start[0])*pitch, static_cast<float>(start[2])*height, static_cast<float>(start[1])*pitch);
-	Vec3f XYZ (static_cast<float>(end[0])*pitch, static_cast<float>(end[2])*height, static_cast<float>(end[1])*pitch);
+	Vec3f xyz = Vec3f (static_cast<float>(start[0])*pitch, static_cast<float>(start[2])*height, static_cast<float>(start[1])*pitch);
+	Vec3f XYZ = Vec3f (static_cast<float>(end[0])*pitch, static_cast<float>(end[2])*height, static_cast<float>(end[1])*pitch);
 
 	const float buffer = -xyz[2];
 	xyz[2] = -XYZ[2];
@@ -15,7 +15,6 @@ void buildSegmentVertices (const Segment& s, const Vec3f& color, const float& pi
 
 	xyz -= Vec3f (thickness, thickness, thickness); // 0
 	XYZ += Vec3f (thickness, thickness, thickness); // 1
-
 
 	Vec3f Xyz = xyz; // 2
 	Xyz[0] = XYZ[0];
@@ -137,10 +136,13 @@ void buildSegmentVertices (const Segment& s, const Vec3f& color, const float& pi
 	//vertices.push_back (XYz); // 5
 
 
-void buildTerminalVertices (const MatrixCoord3D& c, const Vec3f& color, const float& pitch, const float& height, const float& thickness, const unsigned int& offset, float* vertexArray, float* colorArray, unsigned int *ind) {
+void buildTerminalVertices (const MatrixCoord3D &c, const Vec3f &color, const float &pitch, const float &height, const float &thickness, const unsigned int &offset, float *vertexArray, float *colorArray, unsigned int *ind) {
 
 	Vec3f xyz (static_cast<float>(c[0])*pitch, static_cast<float>(c[2])*height, static_cast<float>(c[1])*pitch);
 	Vec3f XYZ = xyz;
+
+	//zeroThreshold (xyz, 1e-4);
+	//zeroThreshold (XYZ, 1e-4);
 
 	const float buffer = -xyz[2];
 	xyz[2] = -XYZ[2];
@@ -234,9 +236,9 @@ void buildTerminalVertices (const MatrixCoord3D& c, const Vec3f& color, const fl
 }
 
 
-AABB buildBox (const Segment& s, const float& pitch, const float& height, const float& thickness) {
-	const MatrixCoord3D& start = s.start;
-	const MatrixCoord3D& end = s.end;
+AABB buildBox (const Segment &s, const float &pitch, const float &height, const float &thickness) {
+	const MatrixCoord3D &start = s.start;
+	const MatrixCoord3D &end = s.end;
 
 	Vec3f xyz (static_cast<float>(start[0])*pitch, static_cast<float>(start[2])*height, static_cast<float>(start[1])*pitch);
 	Vec3f XYZ (static_cast<float>(end[0])*pitch, static_cast<float>(end[2])*height, static_cast<float>(end[1])*pitch);
@@ -252,7 +254,7 @@ AABB buildBox (const Segment& s, const float& pitch, const float& height, const 
 	return AABB (xyz, XYZ);
 }
 
-AABB buildBox (const MatrixCoord3D& c, const float& pitch, const float& height, const float& thickness) {
+AABB buildBox (const MatrixCoord3D &c, const float &pitch, const float &height, const float &thickness) {
 	Vec3f xyz (static_cast<float>(c[0])*pitch, static_cast<float>(c[2])*height, static_cast<float>(c[1])*pitch);
 	Vec3f XYZ = xyz;
 
