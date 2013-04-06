@@ -30,10 +30,10 @@
 
 //typedef unsigned int GLSegment[12*3];
 
-const unsigned int QSVIEW_PERSP = 0;
-const unsigned int QSVIEW_ORTHO = 1;
-
 class MyWindow;
+
+const int QSVIEW_PERSP = 0;
+const int QSVIEW_ORTHO = 1;
 
 class GLWidget : public QGLWidget
 {
@@ -42,8 +42,6 @@ class GLWidget : public QGLWidget
 	private:
 
 	Database& _database;
-
-	unsigned int _projection;
 
 	unsigned int _windowWidth;
 	unsigned int _windowHeight;
@@ -132,8 +130,6 @@ class GLWidget : public QGLWidget
 	std::string getHighlighted () const;
 	std::string getMessage () const;
 
-	void updateProjection ();
-
 	void search (const std::string& s);
 
 public slots:
@@ -149,7 +145,6 @@ public slots:
 	void unhighlightNet (const unsigned int& index, bool update=true);
 	void toggleHighlightNet (const unsigned int& index, bool update=true);
 	void highlightUnrouted ();
-//	void setProjection (int proj);
 
 signals:
 	void positionChanged ();

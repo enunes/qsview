@@ -16,8 +16,6 @@ GLWidget::GLWidget (Database& database, QWidget *parent)
 	_height = 0.5;
 	_segmentThickness = 0.05;
 
-	_projection = QSVIEW_PERSP;
-
 	_pitch = 0.5;
 	_height = 0.5;
 	_terminalThickness = 0.08;
@@ -191,32 +189,14 @@ void GLWidget::initializeGL() {
 
 }
 
-void GLWidget::updateProjection () {
-	glMatrixMode (GL_PROJECTION);
-	glLoadIdentity();
-	if (_projection == QSVIEW_PERSP) {
-		gluPerspective (45.0, (float)_windowWidth/(float)_windowHeight, 1.0, 1000.0);
-	}
-	else if (_projection == QSVIEW_ORTHO) {
-		glOrtho (	-static_cast<float>(_windowWidth)/2.0f,
-				static_cast<float>(_windowWidth)/2.0f,
-				-static_cast<float>(_windowHeight)/2.0f,
-				static_cast<float>(_windowHeight)/2.0f,
-				-500.0f,
-				500.0f );
-	}
-	else {
-		std::cerr << "error on projection!  = " << _projection << std::endl;
-	}
-}
-
 void GLWidget::resizeGL(int w, int h) {
 	_windowWidth = w;
 	_windowHeight = h;
 	glViewport (0, 0, w, h);
-	updateProjection();
-	glMatrixMode (GL_MODELVIEW);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
+	gluPerspective (45.0, (float)_windowWidth/(float)_windowHeight, 1.0, 1000.0);
+	glMatrixMode (GL_MODELVIEW);
 }
 
 void GLWidget::buildGrid () {
@@ -406,8 +386,8 @@ void GLWidget::paintGL() {
 }
 
 void GLWidget::mousePressEvent (QMouseEvent *event) {
-	std::set<unsigned int> hit; // lazyness -- this is so that nobody gets toggled twice.
-	// and I'm also too lazy to implement something to highlight only the first hit
+	std::set<unsigned int> hit; // a set, so that duplicates get excluded..
+	// I'm too lazy to implement something to highlight only the first hit
 	_clickPos = event->pos();
 	if (event->buttons() & Qt::LeftButton) {
 		Ray mouseRay = buildRay (event->x(), event->y());
@@ -434,7 +414,6 @@ void GLWidget::mousePressEvent (QMouseEvent *event) {
 		updateGL();
 	}
 }
-
 
 Ray GLWidget::buildRay (const unsigned int& eventx, const unsigned int& eventy) {
 
@@ -480,6 +459,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event) {
 
 		updateGL();
 	}
+	emit positionChanged ();
 /*	else {
 
 		Ray mouseRay = buildRay (event->x(), event->y());
@@ -508,7 +488,6 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event) {
 //		unhighlightAll();
 		updateGL();
 
-		emit positionChanged ();
 	}*/
 	//	std::cout << _planeDegAngle << std::endl;
 }
@@ -594,12 +573,6 @@ void GLWidget::setTerminals (bool value) {
 	_showTerminals = value;
 	updateGL();
 }
-
-//void GLWidget::setProjection (int proj) {
-//	projection = proj;
-//	updateProjection ();
-//	updateGL();
-//}
 
 void GLWidget::setWebs (bool value) {
 	_showWebs = value;

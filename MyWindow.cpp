@@ -57,10 +57,6 @@ MyWindow::MyWindow (Database& database, QWidget *parent)
 	QCheckBox *grid = new QCheckBox;
 	grid->setChecked(gl->getGrid());
 
-	QComboBox *combo = new QComboBox();
-	combo->addItem ("Perspective");
-	combo->addItem ("Orthogonal");
-
 	QPushButton *clearButton = new QPushButton ("Clear");
 	QPushButton *unroutedButton = new QPushButton ("Unrouted");
 
@@ -81,7 +77,6 @@ MyWindow::MyWindow (Database& database, QWidget *parent)
 	toolbar1->addWidget (webs);
 	toolbar1->addWidget (gridLabel);
 	toolbar1->addWidget (grid);
-	toolbar1->addWidget (combo);
 
 	QHBoxLayout *toolbar2 = new QHBoxLayout;
 	toolbar2->addWidget (mousePosition);
@@ -110,7 +105,6 @@ MyWindow::MyWindow (Database& database, QWidget *parent)
 	connect (gl, SIGNAL (positionChanged()), this, SLOT (updatePosition()));
 	connect (gl, SIGNAL (selectedChanged()), this, SLOT (updateSelected()));
 	connect (gl, SIGNAL (messageChanged()), this, SLOT (updateMessage()));
-	//connect (combo, SIGNAL (currentIndexChanged(int)), gl, SLOT (setPerspective(int)));
 
 	setLayout (layout);
 }

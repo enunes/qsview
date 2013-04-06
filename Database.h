@@ -30,4 +30,5 @@ struct Database {
 	std::vector <unsigned int> unroutedList;
 };
 
+
 #endif
