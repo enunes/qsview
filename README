@@ -1,0 +1,12 @@
+Qsview
+3D symbolic routing viewer
+
+Erico Nunes
+nunes.erico % gmail.com
+
+This is code I developed during my graduation and while I was learning C++ by
+myself.
+It works but isn't any sort of code that I'm proud of today. I decided to push
+it in here anyway as it is. I might do some housekeeping on it and do some
+documentation as I recognize it's quite messy but I don't plan to add new
+features to it.
